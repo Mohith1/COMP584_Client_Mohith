@@ -29,4 +29,9 @@ export class AuthService {
     // Implement logout logic here
     localStorage.removeItem(this.token);
   } 
+
+  isAuthenticated(): boolean {
+    // Check if the user is authenticated
+    return localStorage.getItem(this.token) != null;
+  }
 }
