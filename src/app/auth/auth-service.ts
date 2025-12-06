@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root'
 })
 export class AuthService {
-
+  private token = 'auth_token';
   constructor(private http: HttpClient) { }
 
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
@@ -19,9 +19,14 @@ export class AuthService {
     .pipe(tap(response => {
       // Handle the response, e.g., store the token
       if(response.success) {
-        localStorage.setItem('authToken', response.token);
+        localStorage.setItem(this.token, response.token);
       }
-      console.log('Login response:', response);
+      
     }));  
   }
+
+  logout(): void {
+    // Implement logout logic here
+    localStorage.removeItem(this.token);
+  } 
 }
